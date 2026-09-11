@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — RED'S ACADEMY</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="admin-login" id="admin-login">
+  <div class="login-card">
+    <div style="display:flex;justify-content:center;">
+      <span class="crest" style="width:44px;height:44px;font-size:22px;">R</span>
+    </div>
+    <h3>Admin sign in</h3>
+    <p class="hint">RED'S ACADEMY dashboard</p>
+    <div class="form-field">
+      <label for="admin-pass">Password</label>
+      <input type="password" id="admin-pass" autocomplete="current-password">
+    </div>
+    <button class="btn btn-primary" style="width:100%;" id="admin-login-btn">Sign in</button>
+    <p class="login-error" id="admin-login-error">Wrong password — try again.</p>
+    <p style="color:var(--ash-dim);font-size:12px;margin-top:20px;text-align:center;">
+      Edits save to this browser only. See Settings → About this dashboard once signed in.
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="admin-shell" id="admin-dashboard" style="display:none;">
+  <aside class="admin-side">
+    <a href="index.html" class="brand"><span class="crest">R</span>RED'S&nbsp;<span class="sub">ACADEMY</span></a>
+    <nav class="admin-nav" id="admin-nav">
+      <button data-section="overview" class="active">Overview</button>
+      <button data-section="leaderboard">Leaderboard</button>
+      <button data-section="graduates">Graduates</button>
+      <button data-section="announcements">Announcements</button>
+      <button data-section="training">Training</button>
+      <button data-section="settings">Settings</button>
+    </nav>
+    <div class="logout">
+      <button class="btn btn-ghost btn-sm" style="width:100%;" id="admin-view-site">View site</button>
+      <button class="btn btn-danger btn-sm" style="width:100%;margin-top:8px;" id="admin-logout">Log out</button>
+    </div>
+  </aside>
+  <main class="admin-main" id="admin-main">
+    <!-- rendered by admin.js -->
+  </main>
+</div>
+
+<!-- generic form modal for add/edit -->
+<div class="modal-backdrop" id="form-modal">
+  <div class="modal" style="position:relative;max-width:520px;">
+    <button class="modal-close" id="form-modal-close" aria-label="Close">✕</button>
+    <h3 id="form-modal-title">Edit item</h3>
+    <form id="form-modal-body" style="margin-top:18px;"></form>
+    <div style="display:flex;gap:10px;margin-top:22px;">
+      <button type="button" class="btn btn-ghost" id="form-modal-cancel" style="flex:1;">Cancel</button>
+      <button type="submit" form="form-modal-body" class="btn btn-primary" style="flex:1;">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training — RED'S ACADEMY</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="crest">R</span>RED'S&nbsp;<span class="sub">ACADEMY</span></a>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="training.html">Training</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="graduates.html">Graduates</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="contact.html">Contact</a>
+      <a href="#" class="btn btn-primary btn-sm" data-open-register style="margin-left:6px;">Register</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="kicker">One intake · Four weeks</div>
+    <h1 class="display">The <span style="color:var(--crimson-l);">program</span></h1>
+    <p>One month, split into four weeks that build on each other — from fixing mechanics to competing under real pressure. Both tracks follow this structure, taught through their own games.</p>
+  </div>
+</header>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div id="week-list" class="week-list">
+      <div class="empty"><b>Loading the schedule…</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div>
+      <h2 style="font-size:24px;">Which track is yours?</h2>
+      <p style="color:var(--ash);margin-top:8px;">Headshot for tactical FPS. Esports for team-based competitive titles.</p>
+    </div>
+    <a href="#" class="btn btn-primary" data-open-register>Register now</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a href="index.html" class="brand"><span class="crest">R</span>RED'S&nbsp;<span class="sub">ACADEMY</span></a>
+      <p style="color:var(--ash-dim);font-size:13.5px;margin-top:14px;max-width:34ch;">A one-month gaming academy for players who want a real coach, not just more grinding.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="graduates.html">Graduates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="announcements.html">Announcements</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 RED'S ACADEMY. All rights reserved.</span>
+    <span>Built for players who show up.</span>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="register-modal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <h3>Choose your track</h3>
+    <p class="hint">Pick the path you're training for — you'll be sent straight to that track's coach on Telegram.</p>
+    <div class="path-choice">
+      <a href="#" id="path-headshot" target="_blank" rel="noopener" class="path-card">
+        <div><b>Headshot</b><span>Tactical FPS &amp; aim-focused training</span></div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#" id="path-esports" target="_blank" rel="noopener" class="path-card">
+        <div><b>Esports</b><span>Team-based competitive &amp; strategy training</span></div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
