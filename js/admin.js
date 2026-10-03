@@ -336,8 +336,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function wireSettings(){
     document.getElementById('save-settings').addEventListener('click', () => {
       const s = raGet('settings');
-      s.telegramHeadshot = document.getElementById('s-telegramHeadshot').value.trim();
-      s.telegramEsports = document.getElementById('s-telegramEsports').value.trim();
+      s.telegramHeadshot = normalizeUrl(document.getElementById('s-telegramHeadshot').value);
+      s.telegramEsports = normalizeUrl(document.getElementById('s-telegramEsports').value);
       s.contactEmail = document.getElementById('s-contactEmail').value.trim();
       s.contactLocation = document.getElementById('s-contactLocation').value.trim();
       s.aboutIntro = document.getElementById('s-aboutIntro').value.trim();
@@ -393,6 +393,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+function normalizeUrl(url){
+  const trimmed = String(url ?? '').trim();
+  if(!trimmed) return '';
+  if(/^https?:\/\//i.test(trimmed)) return trimmed;
+  return 'https://' + trimmed.replace(/^\/+/, '');
+}
 function escapeHtml(str){
   return String(str ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 }

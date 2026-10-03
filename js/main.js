@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const headshotLink = document.getElementById('path-headshot');
   const esportsLink = document.getElementById('path-esports');
 
-  if(headshotLink) headshotLink.href = settings.telegramHeadshot;
-  if(esportsLink) esportsLink.href = settings.telegramEsports;
+  if(headshotLink) headshotLink.href = normalizeUrl(settings.telegramHeadshot);
+  if(esportsLink) esportsLink.href = normalizeUrl(settings.telegramEsports);
 
   function openModal(){
     if(backdrop){ backdrop.classList.add('open'); document.body.style.overflow='hidden'; }
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('[data-fill="contactEmail"]').forEach(el => el.textContent = settings.contactEmail);
   document.querySelectorAll('[data-fill="contactEmail-href"]').forEach(el => el.href = 'mailto:' + settings.contactEmail);
   document.querySelectorAll('[data-fill="contactLocation"]').forEach(el => el.textContent = settings.contactLocation);
-  document.querySelectorAll('[data-fill="telegramHeadshot"]').forEach(el => { el.href = settings.telegramHeadshot; el.textContent = settings.telegramHeadshot.replace('https://',''); });
-  document.querySelectorAll('[data-fill="telegramEsports"]').forEach(el => { el.href = settings.telegramEsports; el.textContent = settings.telegramEsports.replace('https://',''); });
+  document.querySelectorAll('[data-fill="telegramHeadshot"]').forEach(el => { el.href = normalizeUrl(settings.telegramHeadshot); el.textContent = settings.telegramHeadshot.replace('https://',''); });
+  document.querySelectorAll('[data-fill="telegramEsports"]').forEach(el => { el.href = normalizeUrl(settings.telegramEsports); el.textContent = settings.telegramEsports.replace('https://',''); });
 
   /* ---------- about page ---------- */
   document.querySelectorAll('[data-fill="aboutIntro"]').forEach(el => el.textContent = settings.aboutIntro);
@@ -116,6 +116,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+function normalizeUrl(url){
+  const trimmed = String(url ?? '').trim();
+  if(!trimmed) return '#';
+  if(/^https?:\/\//i.test(trimmed)) return trimmed;
+  return 'https://' + trimmed.replace(/^\/+/, '');
+}
 function escapeHtml(str){
   return String(str ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 }
