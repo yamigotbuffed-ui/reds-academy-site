@@ -2,7 +2,7 @@
    RED'S ACADEMY — shared front-end behavior
    ======================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
   /* mobile nav toggle */
   const toggle = document.querySelector('.nav-toggle');
@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.nav-links a').forEach(a => {
     if(a.getAttribute('href') === here) a.classList.add('active');
   });
+
+  /* wait for the shared database before rendering any data-driven content */
+  await raReady;
 
   /* ---------- register modal ---------- */
   const settings = raGet('settings');

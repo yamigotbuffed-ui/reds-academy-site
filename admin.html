@@ -24,7 +24,7 @@
     <button class="btn btn-primary" style="width:100%;" id="admin-login-btn">Sign in</button>
     <p class="login-error" id="admin-login-error">Wrong password — try again.</p>
     <p style="color:var(--ash-dim);font-size:12px;margin-top:20px;text-align:center;">
-      Edits save to this browser only. See Settings → About this dashboard once signed in.
+      Edits save to a shared database — visible to every visitor on any device.
     </p>
   </div>
 </div>
@@ -66,6 +66,8 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="js/store.js"></script>
 <script src="js/admin.js"></script>
 </body>

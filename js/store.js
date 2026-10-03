@@ -1,13 +1,27 @@
 /* ========================================================
-   RED'S ACADEMY — data store
-   Everything the admin can edit lives in localStorage under
-   the "ra_" prefix. First load seeds it from the defaults
-   below. Every page reads from here so admin edits show up
-   everywhere automatically.
+   RED'S ACADEMY — data store (Firebase Firestore backed)
+   Everything the admin edits is read from / written to a
+   shared Firestore database, so changes show up for every
+   visitor on every device — not just the browser that made
+   the edit.
 
-   NOTE: localStorage is per-browser, not a shared database —
-   see admin.html login screen copy for what this means.
+   Firestore layout: collection "redsAcademy", one document
+   per data set, each holding { value: <the actual data> }.
    ======================================================== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAkCbW5qFkscMdQ4YB5vSrJr2dGfrfHzqw",
+  authDomain: "redsacademy-6e735.firebaseapp.com",
+  projectId: "redsacademy-6e735",
+  storageBucket: "redsacademy-6e735.firebasestorage.app",
+  messagingSenderId: "279543244847",
+  appId: "1:279543244847:web:abc0c7fe3c86de9c89feda",
+  measurementId: "G-995FYXR7DS"
+};
+
+firebase.initializeApp(firebaseConfig);
+const raDb = firebase.firestore();
+const RA_COLLECTION = "redsAcademy";
 
 const RA_DEFAULTS = {
   settings: {
@@ -44,33 +58,39 @@ const RA_DEFAULTS = {
   ]
 };
 
-const RA_KEYS = {
-  settings: "ra_settings",
-  leaderboard: "ra_leaderboard",
-  graduates: "ra_graduates",
-  announcements: "ra_announcements",
-  training: "ra_training",
-};
+const RA_DOC_KEYS = Object.keys(RA_DEFAULTS);
+let raCache = {};
 
-function raSeed(){
-  Object.entries(RA_KEYS).forEach(([name, key]) => {
-    if(localStorage.getItem(key) === null){
-      localStorage.setItem(key, JSON.stringify(RA_DEFAULTS[name]));
+async function raInit(){
+  await Promise.all(RA_DOC_KEYS.map(async (name) => {
+    try{
+      const ref = raDb.collection(RA_COLLECTION).doc(name);
+      const snap = await ref.get();
+      if(snap.exists && snap.data() && snap.data().value !== undefined){
+        raCache[name] = snap.data().value;
+      }else{
+        raCache[name] = RA_DEFAULTS[name];
+        await ref.set({ value: RA_DEFAULTS[name] });
+      }
+    }catch(err){
+      console.error("Firestore load failed for", name, err);
+      raCache[name] = RA_DEFAULTS[name];
     }
-  });
+  }));
 }
-raSeed();
+
+const raReady = raInit();
 
 function raGet(name){
-  try{
-    return JSON.parse(localStorage.getItem(RA_KEYS[name])) ?? RA_DEFAULTS[name];
-  }catch(e){
-    return RA_DEFAULTS[name];
-  }
+  return raCache[name] ?? RA_DEFAULTS[name];
 }
+
 function raSet(name, value){
-  localStorage.setItem(RA_KEYS[name], JSON.stringify(value));
+  raCache[name] = value;
+  raDb.collection(RA_COLLECTION).doc(name).set({ value })
+    .catch(err => console.error("Firestore save failed for", name, err));
 }
+
 function raNextId(list){
   return list.reduce((max, item) => Math.max(max, item.id || 0), 0) + 1;
 }

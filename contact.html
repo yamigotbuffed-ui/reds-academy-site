@@ -127,11 +127,14 @@
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="js/store.js"></script>
 <script src="js/main.js"></script>
 <script>
-  document.getElementById('contact-form').addEventListener('submit', function(e){
+  document.getElementById('contact-form').addEventListener('submit', async function(e){
     e.preventDefault();
+    await raReady;
     const s = raGet('settings');
     const name = document.getElementById('cf-name').value;
     const email = document.getElementById('cf-email').value;

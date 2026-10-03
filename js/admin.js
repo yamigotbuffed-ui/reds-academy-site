@@ -4,7 +4,9 @@
 
 const SESSION_KEY = 'ra_admin_session';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+  await raReady;
 
   const loginScreen = document.getElementById('admin-login');
   const dashboard = document.getElementById('admin-dashboard');
@@ -224,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="settings-card">
           <h3>About this dashboard</h3>
-          <p style="color:var(--ash);font-size:13.5px;">Edits here save to this browser's storage. To manage the site from more than one device, or to make edits permanent across visitors, this needs a small backend added later — ask your developer to wire these forms to a database.</p>
+          <p style="color:var(--ash);font-size:13.5px;">Edits here save to a shared database — every visitor, on any device, sees the same up-to-date information.</p>
         </div>
       </div>
       <div class="save-bar"><button class="btn btn-primary" id="save-settings">Save changes</button></div>
